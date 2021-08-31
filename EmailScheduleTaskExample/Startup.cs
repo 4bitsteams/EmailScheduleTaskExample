@@ -48,9 +48,15 @@ namespace EmailScheduleTaskExample
 
             // Add our job
             services.AddSingleton<RemindersJob>();
+            services.AddSingleton<EmailReminderJob>();
+
             services.AddSingleton(new JobSchedule(
                 jobType: typeof(RemindersJob),
                 cronExpression: "0/30 0/1 * 1/1 * ? *")); // run every 5 min
+
+            services.AddSingleton(new JobSchedule(
+               jobType: typeof(EmailReminderJob),
+               cronExpression: "0/30 0/1 * 1/1 * ? *")); // run every 5 min
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
